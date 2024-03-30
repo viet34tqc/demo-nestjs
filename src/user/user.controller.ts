@@ -5,7 +5,7 @@ import JwtGuard from 'src/auth/guard/jwt.guard';
 import EditUserDto from './dto/edit-user.dto';
 import { UserService } from './user.service';
 
-@UseGuards(JwtGuard)
+@UseGuards(JwtGuard) // This will make @GetUser() work
 @Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
