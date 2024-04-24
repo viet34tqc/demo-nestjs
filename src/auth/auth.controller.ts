@@ -5,7 +5,9 @@ import {
   HttpStatus,
   Post,
   UseGuards,
+  UseInterceptors,
 } from '@nestjs/common';
+import { AuthInterceptor } from './auth.interceptor';
 import AuthService from './auth.service';
 import { GetUser } from './decorators/user.decorator';
 import { AuthDto } from './dto';
@@ -13,6 +15,7 @@ import JwtRefreshGuard from './guard/jwt-refresh.guard';
 import JwtGuard from './guard/jwt.guard';
 
 @Controller('auth')
+@UseInterceptors(AuthInterceptor)
 class AuthController {
   constructor(private readonly authService: AuthService) {}
 
@@ -32,7 +35,7 @@ class AuthController {
   @HttpCode(HttpStatus.OK)
   @Post('logout')
   logout(@GetUser('id') id: number) {
-    console.log('id', id)
+    console.log('id', id);
     return this.authService.logout(id);
   }
 
