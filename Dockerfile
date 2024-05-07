@@ -2,13 +2,15 @@ FROM node:21
 
 WORKDIR /app
 
-COPY . .
-
-EXPOSE 3000
+# A wildcard is used to ensure both package.json AND package-lock.json are copied
+COPY package*.json ./
+COPY prisma ./prisma/
 
 RUN npm install -g pnpm
 
 RUN pnpm install
+
+COPY . .
 
 RUN npx prisma generate
 
