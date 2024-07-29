@@ -14,6 +14,7 @@
     "db:test:restart": "pnpm db:test:rm && pnpm db:test:up && dotenv -e .env.test -- npx prisma migrate deploy",
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
+    "migrate": "npx prisma generate && npx prisma db push",
     "start": "nest start --watch",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
